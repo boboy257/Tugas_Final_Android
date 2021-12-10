@@ -1,5 +1,6 @@
 package com.hafiz.tugas_final_android.UI.Detail
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,6 +34,25 @@ class DetailFragment : Fragment() {
         descNews.text = ""+article!!.description
         contentNews.text = ""+article!!.content
 
+        shareBtn.setOnClickListener {
+            shareAction()
+        }
+
+    }
+
+    private fun shareAction() {
+
+        val text = "${article!!.title} - Baca selengkapnya di : ${article!!.url}"
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT, text)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     companion object {
