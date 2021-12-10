@@ -46,6 +46,10 @@ class DetailFragment : Fragment() {
             startActivity(intent)
         }
 
+        backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
     }
 
     private fun shareAction() {
