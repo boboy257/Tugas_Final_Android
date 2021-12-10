@@ -1,6 +1,7 @@
 package com.hafiz.tugas_final_android.UI.Detail
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +37,13 @@ class DetailFragment : Fragment() {
 
         shareBtn.setOnClickListener {
             shareAction()
+        }
+
+        selengkapnyaBtn.setOnClickListener {
+            val url = article!!.url
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
 
     }
