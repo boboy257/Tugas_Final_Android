@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hafiz.tugas_final_android.R
 import com.hafiz.tugas_final_android.adapter.NewsAdapter
+import com.hafiz.tugas_final_android.model.Article
 import kotlinx.android.synthetic.main.fragment_list.*
 import kotlinx.coroutines.launch
 
@@ -35,7 +37,11 @@ class ListFragment : Fragment() {
     }
 
     private fun initVariable() {
-        adapter = NewsAdapter()
+        adapter = NewsAdapter(object : NewsAdapter.Listener {
+            override fun onItemClick(article: Article) {
+                findNavController().navigate(R.id.action_listFragment_to_detailFragment)
+            }
+        })
         rcView_news.setHasFixedSize(true)
         rcView_news.layoutManager = LinearLayoutManager(requireContext())
         rcView_news.adapter = adapter

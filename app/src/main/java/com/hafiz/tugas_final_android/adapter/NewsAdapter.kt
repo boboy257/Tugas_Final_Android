@@ -9,12 +9,16 @@ import com.hafiz.tugas_final_android.model.Article
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_layout_list_news.view.*
 
-class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.Holder>() {
+class NewsAdapter(private val listener: Listener): RecyclerView.Adapter<NewsAdapter.Holder>() {
+
+    interface Listener {
+        fun onItemClick(article: Article)
+    }
 
     private var listNews = mutableListOf<Article>()
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView){
-        fun bind(article: Article) {
+        fun bind(article: Article, listener: Listener) {
             with(itemView) {
                 var img  = ""+article.urlToImage
                 if(img != "null" && img != "") {
@@ -25,6 +29,9 @@ class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.Holder>() {
 
                 titleNews.text = article.title
                 publisherNews.text = article.source.name
+                this.setOnClickListener {
+                    listener.onItemClick(article)
+                }
             }
         }
     }
@@ -40,7 +47,7 @@ class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.Holder>() {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(listNews[position])
+        holder.bind(listNews[position], listener)
     }
 
     override fun getItemCount(): Int {
