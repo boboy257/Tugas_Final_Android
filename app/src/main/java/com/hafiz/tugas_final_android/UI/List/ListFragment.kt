@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hafiz.tugas_final_android.R
+import com.hafiz.tugas_final_android.UI.Detail.DetailFragment
 import com.hafiz.tugas_final_android.adapter.NewsAdapter
 import com.hafiz.tugas_final_android.model.Article
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -39,6 +40,7 @@ class ListFragment : Fragment() {
     private fun initVariable() {
         adapter = NewsAdapter(object : NewsAdapter.Listener {
             override fun onItemClick(article: Article) {
+                DetailFragment.article = article
                 findNavController().navigate(R.id.action_listFragment_to_detailFragment)
             }
         })
