@@ -16,9 +16,12 @@ class NewsAdapter(): RecyclerView.Adapter<NewsAdapter.Holder>() {
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(article: Article) {
             with(itemView) {
-                Picasso.get()
-                    .load(article.urlToImage.toString())
-                    .into(thumbnailNews)
+                var img  = ""+article.urlToImage
+                if(img != "null" && img != "") {
+                    Picasso.get()
+                        .load(img)
+                        .into(thumbnailNews)
+                }
 
                 titleNews.text = article.title
                 publisherNews.text = article.source.name
