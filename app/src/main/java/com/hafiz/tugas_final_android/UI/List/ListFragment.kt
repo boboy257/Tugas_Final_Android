@@ -16,6 +16,16 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initVariable()
+        initListener()
+    }
+
+    private fun initVariable() {
+        
+    }
+
+    private fun initListener() {
+
     }
 
     companion object {
